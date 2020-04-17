@@ -1,11 +1,12 @@
 {% extends 'base.html'%}
-
+{% load static %}
 {% block content %}
 <div class="mother">
-  <input type="text" name="name1">
+  <input type="text" name="name1" class="hi">
   <input type="text" name="name2">
   <input type="text" name="name3">
   <input type="text" name="name4">
   <input type="text" name="name5">
+  <img src="{% static 'image/시크릿히틀러.png'%}" alt="">
 </div>
 {% endblock %}

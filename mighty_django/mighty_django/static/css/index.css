@@ -1,4 +1,8 @@
 .mother {
   display: flex;
   flex-direction: column;
+
+  .hi {
+    background-color: black;
+  }
 }
