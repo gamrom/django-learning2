@@ -17,3 +17,11 @@ def create(request):
         if form.is_valid():
             form.save()
         return redirect('main_index')
+
+def show(request):
+    post_id = request.GET.get('post_id')
+    post = Post.objects.get(id=post_id)
+    context = {
+        'post': post
+    }
+    return render(request, 'show.html', context)

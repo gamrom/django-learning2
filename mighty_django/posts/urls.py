@@ -5,4 +5,5 @@ app_name = "posts"
 urlpatterns = [
     path('new/', new , name="new"),
     path('create/', create, name="create"),
+    path('show/', show, name="show"),
 ]

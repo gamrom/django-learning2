@@ -1,12 +1,13 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content %}
-<div class="mother">
-  <input type="text" name="name1" class="hi">
-  <input type="text" name="name2">
-  <input type="text" name="name3">
-  <input type="text" name="name4">
-  <input type="text" name="name5">
-  <img src="{% static 'image/시크릿히틀러.png'%}" alt="">
+<div class="container">
+  {% for post in posts %}
+    {{post.id}} <br>
+    {{post.title}} <br>
+    {{post.content}} <br>
+    <a href="{% url 'posts:show'%}?post_id={{post.id}}" class="btn btn-primary">go somewhere</a>
+    <br><br>
+  {% endfor %}
 </div>
 {% endblock %}
