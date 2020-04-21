@@ -3,10 +3,9 @@
 {% block content %}
 <div class="container">
   {% for post in posts %}
-    {{post.id}} <br>
     {{post.title}} <br>
     {{post.content}} <br>
-    <a href="{% url 'posts:show'%}?post_id={{post.id}}" class="btn btn-primary">go somewhere</a>
+    <a href="{% url 'posts:show' post.id%}">이동</a>
     <br><br>
   {% endfor %}
 </div>

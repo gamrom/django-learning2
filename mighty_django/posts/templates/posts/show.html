@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content%}
+  상세피이지
+
+제목 : {{post.title}} <br>
+
+내용 : {{post.content}} <br>
+
+<a href="{% url 'posts:edit' post.id %}" class="btn btn-primary">수정하기</a>
+{% endblock %}
