@@ -41,3 +41,9 @@ def update(request, post_id):
         if form.is_valid():
             form.save()
         return redirect('posts:show', post_id)
+
+def delete(request, post_id):
+    if request.method == "POST":
+        post = Post.objects.get(id=post_id)
+        post.delete()
+        return redirect('main_index')
