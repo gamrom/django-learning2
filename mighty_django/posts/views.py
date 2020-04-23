@@ -1,26 +1,29 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from .forms import PostForm
+from django.views.decorators.http import require_POST
 # Create your views here.
 
 def new(request):
     form = PostForm()
     return render(request, 'posts/new.html', {'form': form})
 
+@require_POST
 def create(request):
-    if request.method == "POST":
-        # title = request.POST.get('title')
-        # content = request.POST.get('content')
-        # Post.objects.create(title= title, content= content)
-        # Post.save()
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('main_index')
+    # title = request.POST.get('title')
+    # content = request.POST.get('content')
+    # Post.objects.create(title= title, content= content)
+    # Post.save()
+    form = PostForm(request.POST)
+    if form.is_valid():
+        form.save()
+    # return redirect('main_index')
+    return redirect(form.instance)
 
 def show(request, post_id):
     # post_id = request.GET.get('post_id')
-    post = Post.objects.get(id=post_id)
+    # post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     context = {
         'post': post
     }
@@ -35,15 +38,13 @@ def edit(request, post_id):
     return render(request, 'posts/edit.html', context)
 
 def update(request, post_id):
-    if request.method == "POST":
-        post = Post.objects.get(id=post_id)
-        form = PostForm(request.POST, instance = post)
-        if form.is_valid():
-            form.save()
-        return redirect('posts:show', post_id)
+    post = Post.objects.get(id=post_id)
+    form = PostForm(request.POST, instance = post)
+    if form.is_valid():
+        form.save()
+    return redirect(post)
 
 def delete(request, post_id):
-    if request.method == "POST":
-        post = Post.objects.get(id=post_id)
-        post.delete()
-        return redirect('main_index')
+    post = Post.objects.get(id=post_id)
+    post.delete()
+    return redirect('main_index')
